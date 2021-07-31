@@ -15,7 +15,7 @@ const App = () => {
     const [state, dispatch] = useReducer(reducer, initilaState);
 
     useEffect(() => {
-        getRequest(urls.HOST, actionTypes.AUTH_HANDLER, dispatch);
+        getRequest(urls.LOGIN, actionTypes.AUTH_HANDLER, dispatch);
     }, []);
 
     return (
