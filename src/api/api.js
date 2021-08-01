@@ -8,7 +8,7 @@ import axios from 'axios';
  */
 export const getRequest = async (url, actionType, dispatch) => {
     try {
-        const data = await axios.get(url, { withCredentials: true }).then((resposne) => resposne.data);
+        const data = await axios.get(url).then((resposne) => resposne.data);
         dispatch({ type: actionType, payload: data });
     } catch (error) {
         console.log(error);
