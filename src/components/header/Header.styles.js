@@ -1,16 +1,65 @@
-import { AppBar } from '@material-ui/core';
+import { Avatar, Paper } from '@material-ui/core';
 import styled from 'styled-components/macro';
 
-export const StyledAppBar = styled(AppBar)`
-    height: 70px;
-    padding: 5px 16px;
+export const StylesHeaderWrapper = styled(Paper)`
+    position: fixed;
+    top: 0;
+    left: 0;
     display: flex;
-    flex-direction: row !important;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+    padding: 5px 16px;
+    box-sizing: border-box;
+    width: 100%;
 `;
 
 export const Logo = styled.img`
-    width: 50px;
-    height: 50px;
+    width: 90px;
+    height: 55px;
+`;
+
+export const AuthInformation = styled.div`
+    position: relative;
+`;
+
+export const LoginText = styled.div`
+    font-size: 16px;
+    cursor: pointer;
+
+    ::after {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        left: 0;
+        right: 100%;
+        bottom: -2px;
+        background: #000;
+        height: 2px;
+        transition-property: left right;
+        transition-duration: 0.3s;
+        transition-timing-function: ease-out;
+    }
+    :hover {
+        ::after {
+            right: 0;
+        }
+    }
+    :focus {
+        ::after {
+            right: 0;
+        }
+    }
+
+    :active {
+        ::after {
+            right: 0;
+        }
+    }
+`;
+
+export const StyledAvatar = styled(Avatar)`
+    && {
+        background-color: #85c3e3;
+        cursor: pointer;
+    }
 `;

@@ -1,17 +1,28 @@
-import { Logo, StyledAppBar } from './Header.styles';
-import logo from '../../img/ctf_logo2.png';
+import { AuthInformation, LoginText, Logo, StyledAvatar, StylesHeaderWrapper } from './Header.styles';
+import logo from '../../img/ctf_logo3.png';
 import { useContext } from 'react';
 import Context from '../../store/context';
+import { AccountBox } from '@material-ui/icons';
 
 // Компонент для отрисовки хедера
 const Header = () => {
     const { state } = useContext(Context);
+    const { isAuth } = state;
 
-    console.log(state.isAuth);
+    console.log(isAuth);
     return (
-        <StyledAppBar position='fixed' color='primary'>
+        <StylesHeaderWrapper elevation={2}>
             <Logo src={logo} alt='ctf logo' />
-        </StyledAppBar>
+            <AuthInformation>
+                {isAuth ? (
+                    <StyledAvatar>
+                        <AccountBox />
+                    </StyledAvatar>
+                ) : (
+                    <LoginText>Login</LoginText>
+                )}
+            </AuthInformation>
+        </StylesHeaderWrapper>
     );
 };
 
