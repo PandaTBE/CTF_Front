@@ -1,4 +1,3 @@
-import { useSnackbar } from 'notistack';
 import { useContext } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
@@ -24,6 +23,7 @@ const Login = () => {
 
     useEffect(() => {
         if (isAuth) history.push('/');
+        // eslint-disable-next-line
     }, [isAuth]);
 
     useEffect(() => {
