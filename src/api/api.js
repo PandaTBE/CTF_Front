@@ -11,6 +11,22 @@ export const getRequest = async (url, actionType, dispatch) => {
         const data = await axios.get(url, { withCredentials: true }).then((resposne) => resposne.data);
         dispatch({ type: actionType, payload: data });
     } catch (error) {
-        console.log(error);
+        dispatch({ type: actionType, payload: { error } });
+    }
+};
+
+/**
+ * Функция делает get запрос на бэк
+ * @param {string} url урл для запроса
+ * @param {function} dispatch диспатч в стейт
+ * @param {string} actionType тип экшена
+ * @param {object} body боди запроса
+ */
+export const postRequest = async (url, actionType, dispatch, body) => {
+    try {
+        const data = await axios.post(url, body, { withCredentials: true }).then((resposne) => resposne.data);
+        dispatch({ type: actionType, payload: data });
+    } catch (error) {
+        dispatch({ type: actionType, payload: { error } });
     }
 };

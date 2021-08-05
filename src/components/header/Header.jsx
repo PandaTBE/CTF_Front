@@ -9,9 +9,8 @@ const Header = () => {
     const { state } = useContext(Context);
     const { isAuth } = state;
 
-    console.log(isAuth);
     return (
-        <StylesHeaderWrapper elevation={2}>
+        <StylesHeaderWrapper elevation={1}>
             <Logo src={logo} alt='ctf logo' />
             <AuthInformation>
                 {isAuth ? (

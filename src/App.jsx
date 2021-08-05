@@ -1,3 +1,4 @@
+import { useSnackbar } from 'notistack';
 import { useReducer } from 'react';
 import { useEffect } from 'react';
 import { useContext } from 'react';
@@ -15,19 +16,22 @@ import reducer, { actionTypes } from './store/reducer';
 const App = () => {
     const initilaState = useContext(Context);
     const [state, dispatch] = useReducer(reducer, initilaState);
+    const { enqueueSnackbar } = useSnackbar();
 
     useEffect(() => {
         getRequest(urls.HOST, actionTypes.AUTH_HANDLER, dispatch);
+
+        // eslint-disable-next-line
     }, []);
 
     return (
-        <Context.Provider value={{ state, dispatch }}>
+        <Context.Provider value={{ state, dispatch, enqueueSnackbar }}>
             <AppWrapper>
                 <Header />
                 <BodyWrapper>
                     <Switch>
                         <Route exact path='/' render={() => <UserData />} />
-                        <Route path='/login' render={() => <Login />} />
+                        <Route exact path='/login' render={() => <Login />} />
                     </Switch>
                 </BodyWrapper>
             </AppWrapper>

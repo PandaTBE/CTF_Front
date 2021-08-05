@@ -34,7 +34,7 @@ export const LoginText = styled.div`
         right: 100%;
         bottom: -2px;
         background: #000;
-        height: 2px;
+        height: 1px;
         transition-property: left right;
         transition-duration: 0.3s;
         transition-timing-function: ease-out;
