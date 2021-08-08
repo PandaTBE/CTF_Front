@@ -7,6 +7,9 @@ export const actionTypes = {
     SET_REGISTER_ERROR: 'SET_REGISTER_ERROR',
     SET_SUCCESS_REGISTRATION: 'SET_SUCCESS_REGISTRATION',
     SET_SUCCESS_LOGIN: 'SET_SUCCESS_LOGIN',
+    LOGOUT_SUCCESS: 'LOGOUT_SUCCESS',
+    SET_LOGOUT_ERROR: 'SET_LOGOUT_ERROR',
+    SET_LOGOUT_SUCCESS: 'SET_LOGOUT_SUCCESS',
 };
 
 // Функция для изменения флага авторизации
@@ -95,6 +98,38 @@ const setSuccessLogin = (state, action) => {
     };
 };
 
+// Изменение флага о успешном выходе
+const logoutSuccess = (state, action) => {
+    if (!action.payload.error) {
+        return {
+            ...state,
+            logoutSuccess: true,
+            isAuth: false,
+        };
+    } else {
+        return {
+            ...state,
+            logoutError: true,
+        };
+    }
+};
+
+// Изменение флага вручную об выходе
+const setLogutSuccess = (state, action) => {
+    return {
+        ...state,
+        logoutSuccess: action.payload,
+    };
+};
+
+// Изменение флага о ошибке выхода
+const setLogoutError = (state, action) => {
+    return {
+        ...state,
+        logoutError: action.payload,
+    };
+};
+
 // Главный редьюсер для изменения стейта в зависимости от actio type
 const reducer = (state, action) => {
     switch (action.type) {
@@ -121,6 +156,15 @@ const reducer = (state, action) => {
 
         case actionTypes.SET_SUCCESS_LOGIN:
             return setSuccessLogin(state, action);
+
+        case actionTypes.LOGOUT_SUCCESS:
+            return logoutSuccess(state, action);
+
+        case actionTypes.SET_LOGOUT_ERROR:
+            return setLogoutError(state, action);
+
+        case actionTypes.SET_LOGOUT_SUCCESS:
+            return setLogutSuccess(state, action);
 
         default:
             return state;

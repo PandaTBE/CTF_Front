@@ -6,6 +6,8 @@ const Context = createContext({
     registerError: false,
     successRegistration: false,
     successLogin: false,
+    logoutSuccess: false,
+    logoutError: false,
 });
 
 export default Context;

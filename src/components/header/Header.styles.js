@@ -58,8 +58,18 @@ export const LoginText = styled.div`
 `;
 
 export const StyledAvatar = styled(Avatar)`
+    margin-right: 10px;
     && {
         background-color: #85c3e3;
         cursor: pointer;
     }
+`;
+
+export const AuthWrapper = styled.div`
+    display: flex;
+    align-items: center;
+`;
+
+export const LogoutTextWrapper = styled.div`
+    position: relative;
 `;
