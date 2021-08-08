@@ -23,10 +23,10 @@ const setUserAuth = (state, action) => {
 // Функция для проверки авторизации
 const authHandler = (state, action) => {
     if (!action.payload.error) {
-        console.log(action.payload);
         return {
             ...state,
             isAuth: true,
+            username: action.payload.Username,
         };
     } else {
         return {

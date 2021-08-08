@@ -5,6 +5,7 @@ import { useContext } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { getRequest } from './api/api';
 import { AppWrapper, BodyWrapper } from './App.styles';
+import Files from './components/files/Files';
 import Header from './components/header/Header';
 import Login from './components/login/Login';
 import UserData from './components/userData/UserData';
@@ -32,6 +33,7 @@ const App = () => {
                     <Switch>
                         <Route exact path='/' render={() => <UserData />} />
                         <Route exact path='/login' render={() => <Login />} />
+                        <Route exact path='/files' render={() => <Files />} />
                     </Switch>
                 </BodyWrapper>
             </AppWrapper>
