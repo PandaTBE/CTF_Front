@@ -10,6 +10,13 @@ export const actionTypes = {
     LOGOUT_SUCCESS: 'LOGOUT_SUCCESS',
     SET_LOGOUT_ERROR: 'SET_LOGOUT_ERROR',
     SET_LOGOUT_SUCCESS: 'SET_LOGOUT_SUCCESS',
+    SET_SHOW_SPINNER: 'SET_SHOW_SPINNER',
+    SET_FILES: 'SET_FILES',
+    GET_FILES: 'GET_FILES',
+    SET_FILES_ERROR: 'SET_FILES_ERROR',
+    FILE_UPLOAD: 'FILE_UPLOAD',
+    SET_FILE_UPLOADED: 'SET_FILE_UPLOADED',
+    SET_FILE_UPLOAD_ERROR: 'SET_FILE_UPLOAD_ERROR',
 };
 
 // Функция для изменения флага авторизации
@@ -130,6 +137,70 @@ const setLogoutError = (state, action) => {
     };
 };
 
+// Изменение флага для показа спинера
+const setShowSpinenr = (state, action) => {
+    return {
+        ...state,
+        showSpinner: action.payload,
+    };
+};
+
+// Функция для получения всех фалйлов
+const getFiles = (state, action) => {
+    if (!action.payload.error) {
+        return {
+            ...state,
+            files: action.payload,
+            showSpinner: false,
+        };
+    } else {
+        return {
+            ...state,
+            getFilesError: true,
+            showSpinner: false,
+        };
+    }
+};
+
+// ИЗменение флага об ошибке при получении файлов
+const setFilesError = (state, action) => {
+    return {
+        ...state,
+        getFilesError: action.payload,
+    };
+};
+
+// Пост файла
+const fileUpload = (state, action) => {
+    if (!action.payload.error) {
+        return {
+            ...state,
+            isFileUploaded: true,
+        };
+    } else {
+        return {
+            ...state,
+            fileUploadError: true,
+        };
+    }
+};
+
+// Установка флага, что фалй загружен
+const setFileUploaded = (state, action) => {
+    return {
+        ...state,
+        isFileUploaded: action.payload,
+    };
+};
+
+// ИЗменение флага при ошибке получения файла
+const setFileUploadError = (state, action) => {
+    return {
+        ...state,
+        fileUploadError: action.payload,
+    };
+};
+
 // Главный редьюсер для изменения стейта в зависимости от actio type
 const reducer = (state, action) => {
     switch (action.type) {
@@ -165,6 +236,24 @@ const reducer = (state, action) => {
 
         case actionTypes.SET_LOGOUT_SUCCESS:
             return setLogutSuccess(state, action);
+
+        case actionTypes.SET_SHOW_SPINNER:
+            return setShowSpinenr(state, action);
+
+        case actionTypes.GET_FILES:
+            return getFiles(state, action);
+
+        case actionTypes.SET_FILES_ERROR:
+            return setFilesError(state, action);
+
+        case actionTypes.FILE_UPLOAD:
+            return fileUpload(state, action);
+
+        case actionTypes.SET_FILE_UPLOAD_ERROR:
+            return setFileUploadError(state, action);
+
+        case actionTypes.SET_FILE_UPLOADED:
+            return setFileUploaded(state, action);
 
         default:
             return state;

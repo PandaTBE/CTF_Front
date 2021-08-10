@@ -1,10 +1,11 @@
+import { CircularProgress } from '@material-ui/core';
 import { useSnackbar } from 'notistack';
 import { useReducer } from 'react';
 import { useEffect } from 'react';
 import { useContext } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { getRequest } from './api/api';
-import { AppWrapper, BodyWrapper } from './App.styles';
+import { AppWrapper, BodyWrapper, Spinner } from './App.styles';
 import Files from './components/files/Files';
 import Header from './components/header/Header';
 import Login from './components/login/Login';
@@ -19,6 +20,8 @@ const App = () => {
     const [state, dispatch] = useReducer(reducer, initilaState);
     const { enqueueSnackbar } = useSnackbar();
 
+    const { showSpinner } = state;
+
     useEffect(() => {
         getRequest(urls.HOST, actionTypes.AUTH_HANDLER, dispatch);
 
@@ -28,6 +31,12 @@ const App = () => {
     return (
         <Context.Provider value={{ state, dispatch, enqueueSnackbar }}>
             <AppWrapper>
+                {showSpinner && (
+                    <Spinner>
+                        <CircularProgress />
+                    </Spinner>
+                )}
+
                 <Header />
                 <BodyWrapper>
                     <Switch>

@@ -5,4 +5,6 @@ export const urls = {
     LOGIN: `${host}/login`,
     LOGOUT: `${host}/logout`,
     REGISTER: `${host}/register`,
+    GET_FILES: `${host}`,
+    POST_FILE: `${host}`,
 };

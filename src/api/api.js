@@ -22,9 +22,9 @@ export const getRequest = async (url, actionType, dispatch) => {
  * @param {string} actionType тип экшена
  * @param {object} body боди запроса
  */
-export const postRequest = async (url, actionType, dispatch, body) => {
+export const postRequest = async (url, actionType, dispatch, body, isFile = false) => {
     try {
-        const data = await axios.post(url, body, { withCredentials: true }).then((resposne) => resposne.data);
+        const data = await axios.post(url, body, { withCredentials: true, headers: isFile ? { 'Content-Type': 'multipart/form-data' } : null }).then((resposne) => resposne.data);
         dispatch({ type: actionType, payload: data });
     } catch (error) {
         dispatch({ type: actionType, payload: { error } });

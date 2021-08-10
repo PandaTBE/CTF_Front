@@ -9,6 +9,11 @@ const Context = createContext({
     logoutSuccess: false,
     logoutError: false,
     username: '',
+    showSpinner: false,
+    files: null,
+    getFilesError: false,
+    isFileUploaded: false,
+    fileUploadError: false,
 });
 
 export default Context;

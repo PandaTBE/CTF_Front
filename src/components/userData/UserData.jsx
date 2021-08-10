@@ -2,13 +2,14 @@ import { useEffect } from 'react';
 import { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import Context from '../../store/context';
+import { actionTypes } from '../../store/reducer';
 import { HelloText, ShowFiles, UserDataWrapper } from './UserData.styles';
 
 /**
  * Компонент для отрисовки страницы юзера
  */
 const UserData = () => {
-    const { state } = useContext(Context);
+    const { state, dispatch } = useContext(Context);
     const { isAuth, username } = state;
     const history = useHistory();
 
@@ -19,7 +20,10 @@ const UserData = () => {
         // eslint-disable-next-line
     }, [isAuth]);
 
-    const showFilesHandler = () => history.push('/files');
+    const showFilesHandler = () => {
+        history.push('/files');
+        dispatch({ type: actionTypes.SET_SHOW_SPINNER, payload: true });
+    };
 
     return (
         <UserDataWrapper>
