@@ -16,6 +16,7 @@ export const StylesHeaderWrapper = styled(Paper)`
 export const Logo = styled.img`
     width: 90px;
     height: 55px;
+    cursor: pointer;
 `;
 
 export const AuthInformation = styled.div`

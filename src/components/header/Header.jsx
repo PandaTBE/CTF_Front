@@ -39,9 +39,11 @@ const Header = () => {
     const loginHandler = () => history.push('/login');
     const logoutHandler = () => getRequest(urls.LOGOUT, actionTypes.LOGOUT_SUCCESS, dispatch);
 
+    const logoHandler = () => history.push('/');
+
     return (
         <StylesHeaderWrapper elevation={1}>
-            <Logo src={logo} alt='ctf logo' />
+            <Logo onClick={logoHandler} src={logo} alt='ctf logo' />
             <AuthInformation>
                 {isAuth ? (
                     <AuthWrapper>

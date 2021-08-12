@@ -83,6 +83,10 @@ const Files = () => {
 
     const handleChangePage = (_, newPage) => setPage(newPage);
 
+    const handleDownload = (id) => () => {
+        getRequest(`${urls.FILE_DOWNLOAD}/${id}`, actionTypes, dispatch);
+    };
+
     return (
         <FilesWrapper>
             {isAuth ? (
@@ -111,7 +115,9 @@ const Files = () => {
                                                 </TableCell>
                                                 <TableCell align='right'>{element.filename}</TableCell>
                                                 <TableCell align='right'>
-                                                    <Button variant='outlined'>Download</Button>
+                                                    <Button variant='outlined' onClick={handleDownload(element.id)}>
+                                                        Download
+                                                    </Button>
                                                 </TableCell>
                                             </TableRow>
                                         ))}
