@@ -3,11 +3,11 @@ import { useState } from 'react';
 import { useRef } from 'react';
 import { useContext } from 'react';
 import { useEffect } from 'react';
-import { getRequest, postRequest } from '../../api/api';
+import { getRequest, postRequest, getFileRequest } from '../../api/api';
 import { urls } from '../../constants/urls';
 import Context from '../../store/context';
 import { actionTypes } from '../../store/reducer';
-import { FilesWrapper, StyledButton } from './Files.styled';
+import { FilesWrapper, PaperTitle, StyledButton } from './Files.styled';
 
 /**
  * Компонент для отрисовки страницы с файламии
@@ -19,6 +19,16 @@ const Files = () => {
     const { getFilesError, files, username, isAuth, fileUploadError, isFileUploaded } = state;
 
     const hiddenFileInput = useRef();
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            if (username) {
+                getRequest(`${urls.GET_FILES}/${username}/files`, actionTypes.GET_FILES, dispatch);
+            }
+        }, 5000);
+        return () => clearInterval(interval);
+        // eslint-disable-next-line
+    }, [username]);
 
     useEffect(() => {
         if (isFileUploaded && username) {
@@ -83,8 +93,8 @@ const Files = () => {
 
     const handleChangePage = (_, newPage) => setPage(newPage);
 
-    const handleDownload = (id) => () => {
-        getRequest(`${urls.FILE_DOWNLOAD}/${id}`, actionTypes, dispatch);
+    const handleDownload = (id, fileName) => () => {
+        getFileRequest(`${urls.FILE_DOWNLOAD}/${id}`, fileName);
     };
 
     return (
@@ -96,8 +106,10 @@ const Files = () => {
                     <StyledButton onClick={fileAddHandler} variant='outlined'>
                         Add file
                     </StyledButton>
+
                     {files?.length > 0 && (
                         <Paper>
+                            <PaperTitle>Auto list reload every 5 seconds</PaperTitle>
                             <TableContainer>
                                 <Table size='small'>
                                     <TableHead>
@@ -115,7 +127,7 @@ const Files = () => {
                                                 </TableCell>
                                                 <TableCell align='right'>{element.filename}</TableCell>
                                                 <TableCell align='right'>
-                                                    <Button variant='outlined' onClick={handleDownload(element.id)}>
+                                                    <Button variant='outlined' onClick={handleDownload(element.id, element.filename)}>
                                                         Download
                                                     </Button>
                                                 </TableCell>

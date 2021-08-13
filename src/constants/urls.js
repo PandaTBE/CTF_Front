@@ -1,4 +1,4 @@
-const host = 'http://localhost:8003';
+const host = 'http://localhost:8003/api';
 
 export const urls = {
     HOST: host,

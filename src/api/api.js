@@ -1,4 +1,5 @@
 import axios from 'axios';
+import download from 'downloadjs';
 
 /**
  * Функция делает get запрос на бэк
@@ -28,5 +29,19 @@ export const postRequest = async (url, actionType, dispatch, body, isFile = fals
         dispatch({ type: actionType, payload: data });
     } catch (error) {
         dispatch({ type: actionType, payload: { error } });
+    }
+};
+
+/**
+ * Функция делает get запрос на бэк
+ * @param {string} url урл для запроса
+ */
+export const getFileRequest = async (url, fileName) => {
+    try {
+        const data = await axios.get(url, { withCredentials: true, responseType: 'blob' }).then((resposne) => resposne.data);
+        download(data, fileName, data.type);
+        return data;
+    } catch (error) {
+        return { error };
     }
 };

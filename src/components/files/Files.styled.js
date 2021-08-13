@@ -11,3 +11,8 @@ export const StyledButton = styled(Button)`
         text-transform: none !important;
     }
 `;
+
+export const PaperTitle = styled.div`
+    text-align: center;
+    margin-top: 5px;
+`;
